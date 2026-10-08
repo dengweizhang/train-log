@@ -18,7 +18,7 @@ python3 -m http.server 8000
 
 - GitHub 仓库：https://github.com/dengweizhang/train-log
 - Cloudflare Pages 项目：`train-log`
-- 正式地址：https://train-log.pages.dev/
+- 正式地址：https://train-log-90b.pages.dev/
 - 兼容旧入口：https://train-log-site.pages.dev/（跳转到正式地址）
 - Production branch：`main`
 - Build command：`npm run build`

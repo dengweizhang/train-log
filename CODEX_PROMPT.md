@@ -6,6 +6,8 @@ Requirements:
 - Keep the site independent from `dwstyle.cc`; `dwstyle.cc` should only link to this site later.
 - Preserve the minimalist visual system already implemented.
 - Keep the site static-first and easy to deploy on Cloudflare Pages / GitHub Pages.
+- Publish `main` through the GitHub repository `dengweizhang/train-log` and Cloudflare Pages native Git integration (`train-log`). Do not upload the production site from this computer with Wrangler.
+- The canonical URL is `https://train-log-90b.pages.dev/`; the previous `train-log-site.pages.dev` address is a redirect for existing links.
 - Treat `workouts.js` as the canonical workout data source.
 - Preserve every historical workout exactly; do not normalize away details such as varying set reps or assisted-pull-up assistance.
 - Assisted pull-up progress is inverse: lower assistance means stronger performance.
