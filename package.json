@@ -1,0 +1,13 @@
+{
+  "name": "train-log-site",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node scripts/prepare.mjs",
+    "deploy": "node scripts/publish.mjs",
+    "deploy:check": "npm run build"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

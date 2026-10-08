@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f5f2ea" />
+  <meta name="description" content="Davin 的训练日志：用日历记录每次训练，观察长期进步。" />
+  <title>Training Log · Davin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">DAVIN / TRAINING LOG</p>
+        <h1>训练日志</h1>
+      </div>
+      <p class="intro">训练不是一次证明，而是一条时间线。</p>
+    </header>
+
+    <section class="stats" id="stats" aria-label="训练概览"></section>
+
+    <nav class="tabs" role="tablist" aria-label="页面区域">
+      <button id="calendarTab" class="tab active" role="tab" aria-selected="true" aria-controls="calendar" data-target="calendar">日历</button>
+      <button id="progressTab" class="tab" role="tab" aria-selected="false" aria-controls="progress" tabindex="-1" data-target="progress">Progress</button>
+    </nav>
+
+    <section id="calendar" class="panel active" role="tabpanel" aria-labelledby="calendarTab">
+      <div class="calendar-layout">
+        <section class="calendar-card" aria-labelledby="calendarTitle">
+          <div class="calendar-toolbar">
+            <h2 id="calendarTitle"></h2>
+            <div class="month-navigation">
+              <button id="prevMonth" class="icon-button" type="button" aria-label="上个月" title="上个月">‹</button>
+              <button id="nextMonth" class="icon-button" type="button" aria-label="下个月" title="下个月">›</button>
+            </div>
+          </div>
+          <div class="calendar-meta">
+            <p id="monthSummary"></p>
+            <div class="calendar-jump">
+              <input id="monthPicker" type="month" aria-label="选择月份" />
+              <button id="latestMonth" class="text-button" type="button">最近训练</button>
+            </div>
+          </div>
+          <div class="weekdays" aria-hidden="true">
+            <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+          </div>
+          <div id="calendarGrid" class="calendar-grid" role="group" aria-label="选择训练日期"></div>
+          <div class="calendar-legend">
+            <span><i class="workout-dot" aria-hidden="true"></i>有训练记录</span>
+            <span>点选日期查看记录</span>
+          </div>
+        </section>
+        <aside id="dayDetail" class="day-detail" aria-live="polite" aria-atomic="true"></aside>
+      </div>
+    </section>
+
+    <section id="progress" class="panel" role="tabpanel" aria-labelledby="progressTab" tabindex="0" hidden>
+      <div class="section-head">
+        <h2>长期变化</h2>
+        <p class="section-copy">辅助引体的辅助重量越低，代表能力越强。</p>
+      </div>
+      <div class="progress-grid" id="progressGrid"></div>
+    </section>
+
+    <footer>
+      <span>Start · 2026-07-28</span>
+      <span>Keep showing up.</span>
+    </footer>
+  </main>
+  <script src="workouts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
