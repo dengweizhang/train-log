@@ -51,7 +51,8 @@ function normalizedRemote(remote) {
 }
 
 function isAllowedPath(path) {
-  return allowedPaths.includes(path) || path.startsWith('scripts/');
+  return allowedPaths.includes(path) || path.startsWith('scripts/') ||
+    /^workouts-\d{4}-\d{2}-\d{2}\.js$/.test(path);
 }
 
 function checkStagedPaths() {
@@ -96,7 +97,11 @@ checkStagedPaths();
 run(process.execPath, ['scripts/prepare.mjs'], '构建失败，尚未提交或推送。');
 
 // Omit paths that have never existed, while retaining tracked deletions.
-const pathsToStage = allowedPaths.filter((path) =>
+const workoutPaths = gitValue(
+  ['ls-files', '--cached', '--others', '--exclude-standard', '-z', '--', 'workouts-*.js'],
+  '无法检查独立训练记录文件，尚未提交或推送。',
+).split('\0').filter(path => /^workouts-\d{4}-\d{2}-\d{2}\.js$/.test(path));
+const pathsToStage = [...new Set([...allowedPaths, ...workoutPaths])].filter((path) =>
   existsSync(new URL(`../${path}`, import.meta.url)) ||
   gitResult(['ls-files', '--error-unmatch', '--', path]).status === 0,
 );

@@ -24,7 +24,7 @@ python3 -m http.server 8000
 - Build command：`npm run build`
 - Build output directory：`dist`
 - Node.js：22，配置见 `.nvmrc`。
-- `npm run build` 只把 `index.html`、`styles.css`、`workouts.js`、`app.js` 复制到 `dist/`，不转换内容。
+- `npm run build` 把 `index.html`、`styles.css` 和页面引用的全部 JavaScript（包括独立日期的训练记录）复制到 `dist/`，不转换内容。引用的文件不存在时构建会报错，避免部署缺少记录的页面。
 
 首次在其他电脑使用（Node.js 22 或更高版本）：
 
@@ -60,6 +60,10 @@ npm run deploy
 ```
 
 页面会自动更新月历、统计数据和 Progress。
+
+也兼容 `workouts-YYYY-MM-DD.js` 形式的独立记录文件：用 `window.WORKOUTS.push(...)` 添加记录，并在 `index.html` 的 `workouts.js` 之后、`app.js` 之前引用。构建会自动包含这些引用，发布脚本会提交这些日期文件。日常更新仍建议直接追加到 `workouts.js`，只需修改一个文件。
+
+若 GitHub 的 Cloudflare Pages 检查显示部署成功，但新记录没有出现，请检查页面引用的训练脚本是否包含在 `dist/` 中；Pages 对缺失文件可能返回 HTML 页面，HTTP 200 并不代表已取得 JavaScript。运行 `npm test` 可检查构建是否保留全部脚本及训练记录。
 
 月历默认打开最近一次训练所在月份；可用左右箭头、月份选择器查看其他月份，点击日期查看当天完整训练记录。桌面端并排显示月历和详情，手机端上下排列。没有记录的日期显示「暂无训练记录」。
 
